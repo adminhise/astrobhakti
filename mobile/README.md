@@ -17,6 +17,14 @@ Start the backend first (`cd backend && npm start`). `10.0.2.2` is how the Andro
 
 In development, **Pay** simulates the payment provider's webhook through `/api/dev/pay/:id`. In production the checkout route returned by the booking (store billing or gateway) confirms the booking via the signed webhook.
 
+## Test APK for a phone on the same Wi-Fi
+
+```bash
+flutter build apk --release --target-platform android-arm64 --split-per-abi --android-project-arg cleartext=true --dart-define=API_BASE=http://<your-PC-IP>:8787/api
+```
+
+`cleartext=true` allows the plain-http local backend; leave it off for store builds, which must use an https API. Release builds are currently signed with the debug key; add a real signing config before publishing.
+
 ## Background audio
 
 `just_audio` plays media. For lock-screen controls and background playback, add `audio_service` or `just_audio_background` and the Android foreground-service and iOS background-audio entries once the native folders exist.

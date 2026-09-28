@@ -27,6 +27,8 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // Plain-http backends (local testing) need -Pcleartext=true; store builds keep it off.
+        manifestPlaceholders["usesCleartext"] = (project.findProperty("cleartext") ?: "false").toString()
     }
 
     buildTypes {
